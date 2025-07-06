@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 2 * * *"
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: docker run --rm -e repo=tvbox -e mirror=2 -e jar_suffix=css -e token=$ACCESS_TOKEN -e username=MingIXu -e num=1 -e url='https://www.iyouhun.com/tv/0'  2011820123/tvbox
